@@ -1,0 +1,29 @@
+{
+    "name": "steinhaug/strbuddy",
+    "description": "My personal STRING friend",
+    "keywords": ["string manipulation"],
+    "homepage": "https://kim.steinhaug.com",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kim Steinhaug",
+            "email": "kim@steinhaug.com",
+            "homepage": "http://kim.steinhaug.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {"strbuddy": ""}
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "teststrbuddy": "test/"
+        }
+    }
+}
