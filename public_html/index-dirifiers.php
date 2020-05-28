@@ -53,18 +53,20 @@ echo '<!DOCTYPE html>
     <body>
 ';
 
-$funcs = ['dirify','sanitize'];
+$dirifiers = ['dirify2','cleanString','dirify','convert_high_ascii','filter_1','filter_2','filter_3','cleanString_rewh','cleanString_frte','clean_edfu'];
 
 $strings = [
     'æ/Æ ø/Ø å/Å ä/Ä ö/Ö blåbær frøya ØLBÅTSØK',
-    '? « out ‹ inside › out » <'
+    '? « out ‹ inside › out » <',
+    '<0> «1» ‹2› „3“ ‟4” ’5s’ ❝6❞ ❮7❯ ⹂8s⹂ 〝9〞〝10〟 ＂11s＂ ‚12‘ ‛13❛ ❜14❟ "15s" \'16\'',
+    //'"double", \'single\'; <tag> & [good]',
+    //'٩(-̮̮̃-̃)۶ ٩(●̮̮̃•̃)۶ ٩(͡๏̯͡๏)۶ ٩(-̮̮̃•̃).'
 ];
 // &laquo; &lsaquo; &rsaquo; &raquo;
 
 
 echo '<h1>strbuddy test suit v0.0.0</h1>';
-
-$strbuddy = new strbuddy;
+//$str = new strbuddy;
 
 
 echo '<table>
@@ -73,9 +75,9 @@ echo '<table>
 foreach($strings AS $str){
 
     $new_string = true;
-    foreach($funcs AS $func){
+    foreach($dirifiers AS $func){
 
-        $result = $strbuddy->{$func}($str);
+        $result = $func($str);
 
         $line = [];
         $line[] = $func;
