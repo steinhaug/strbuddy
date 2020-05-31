@@ -11,7 +11,7 @@ v0.5.0 - Updated, 31 may 2020
 Example of usage, with basic features out of the box:
 
     $str = new strbuddy;  
-    echo $str->filename($string); // Valid filename
+    echo $str->dirify($filename); // Valid directory / filename
 
 Outputs:  
 

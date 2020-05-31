@@ -9,7 +9,7 @@
  * Function:
  * 
  * $strbuddy = new strbuddy;
- * $strbuddy->filename($string);
+ * $strbuddy->dirify($string);
  * 
  */
 class strbuddy {
@@ -27,55 +27,33 @@ class strbuddy {
         return $string;
     }
 
-    public function dirify($string, $delimiter='_'){
+    /**
+     * Create a valid directory or filename
+     */
+    public function dirify($string, $delimiter = '_'){
 
         $string = $this->aschiify($string);
         $string = mb_strtolower($string);
         $string = strip_tags($string);                          // remove HTML tags
         $string = preg_replace('/&[^;\s]+;/',' ',$string);      // remove HTML entities
 
+        $string = $this->filename_only($string, $delimiter);
 
-        //$string = $this->sanitize($string);
-        //$string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
-        //$string = preg_replace("/[\s-]+/", " ", $string);
-
+        /*
+        $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+        $string = preg_replace("/[\s-]+/", " ", $string);
         if(($delimiter == '-') OR ($delimiter == '_'))
             $string = preg_replace('/[^\w\s' . $delimiter . ']/', $delimiter, $string);
             else
             $string = preg_replace('/[^\w\s]/', '', $string);
+        */
 
-        return $string;
-    }
-
-    /**
-     * Make filename from string, will try to keep name readable and will remove all illegal characters.
-     */
-    public function filename($string, $delim = '_'){
-
-        $pos = mb_strrpos($string, '.');
-        if( $pos !== false ){
-            $ext = mb_substr($string, mb_strrpos($string, '.') + 1);
-            $filename = mb_substr($string, 0, mb_strrpos($string, '.'));
-        } else {
-            $ext = null;
-            $filename = $string;
+        // Remove any occurencies of ..
+        while( $match = preg_match('/\.\./', $string) ){
+            $string = str_replace('..', '.', $string);
         }
 
-        $filename = $this->aschiify($filename, $delim);
-        $filename = preg_replace($this->filesystem_stripper, '_', $filename);
-        $filename = $this->aschii_only($filename, $delim);
-        $filename = trim($filename, $delim . " \t\n\r\0\x0B");
-
-        if( $ext === null )
-            return $filename;
-
-        $ext = $this->aschiify($ext, $delim);
-        $ext = preg_replace($this->filesystem_stripper, '_', $ext);
-        $ext = $this->aschii_only($ext, $delim);
-
-        $ext = trim($ext, $delim . " \t\n\r\0\x0B");
-
-        return $filename . '.' . $ext;
+        return $string;
     }
 
     /**
@@ -120,6 +98,37 @@ class strbuddy {
             $string = str_replace(' ', $space, $string);
 
         return $string;
+    }
+
+    /**
+     * Make filename from string, will try to keep name readable and will remove all illegal characters.
+     */
+    public function filename_only($string, $delim = '_'){
+
+        $pos = mb_strrpos($string, '.');
+        if( $pos !== false ){
+            $ext = mb_substr($string, mb_strrpos($string, '.') + 1);
+            $filename = mb_substr($string, 0, mb_strrpos($string, '.'));
+        } else {
+            $ext = null;
+            $filename = $string;
+        }
+
+        $filename = $this->aschiify($filename, $delim);
+        $filename = preg_replace($this->filesystem_stripper, '_', $filename);
+        $filename = $this->aschii_only($filename, $delim);
+        $filename = trim($filename, $delim . " \t\n\r\0\x0B");
+
+        if( $ext === null )
+            return $filename;
+
+        $ext = $this->aschiify($ext, $delim);
+        $ext = preg_replace($this->filesystem_stripper, '_', $ext);
+        $ext = $this->aschii_only($ext, $delim);
+
+        $ext = trim($ext, $delim . " \t\n\r\0\x0B");
+
+        return $filename . '.' . $ext;
     }
 
     /**
