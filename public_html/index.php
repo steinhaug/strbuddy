@@ -3,7 +3,9 @@
 define('BR','<br>');
 require '../vendor/autoload.php';
 
-require 'func.dirifiers.php';
+require 'php.libs/emoji-php-static/Emoji.class.php';
+
+//require 'func.dirifiers.php';
 
 //header("Content-Type: text/plain");
 echo '<!DOCTYPE html>
@@ -12,60 +14,37 @@ echo '<!DOCTYPE html>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title></title>
-        <style>
-            table {
-                border-collapse: collapse;
-            }
-            table {
-                border: none;
-            }
-            th, td {
-                border: 1px solid #ccc;
-                border-top: none;
-                border-bottom: none;
-            }
-            td {
-                padding: 0 1em;
-                text-align: center;
-            }
-            .td00 {
-                text-align: left;
-            }
-            td:first-child {
-                padding-left: 0;
-                border-left: 0;
-            }
-            td:last-child {
-                padding-right: 0;
-                border-right: 0;
-            }
-            td:nth-child(4) {
-                text-align: left;
-            }
-            tr.new_string td {
-                border-top: 1px solid #888;
-                background-color: #eee;
-                padding-top: 5px;
-                padding-bottom: 5px;
-            }
-        </style>
+        <style></style>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="php.libs/emoji-php-static/emoji.css" />
     </head>
     <body>
 ';
 
-$funcs = ['dirify','sanitize'];
+$funcs = ['filename'];
 
 $strings = [
-    'æ/Æ ø/Ø å/Å ä/Ä ö/Ö blåbær frøya ØLBÅTSØK',
-    '? « out ‹ inside › out » <'
+    'jv15320' . "\u{1F30F}"  . '-org-01.jv15320 org',
+    'Git-2.26.1-64-bit (1).exe',
+    'wkhtmltox-0.12.5-1.msvc2015-win64.exe',
+    'blåbær.null',
+    ' Bl-<å[b]æ>r".?nUll_* '
 ];
-// &laquo; &lsaquo; &rsaquo; &raquo;
 
 
-echo '<h1>strbuddy test suit v0.0.0</h1>';
 
 $strbuddy = new strbuddy;
+echo '<h1>strbuddy test suit ' . $strbuddy::version . '</h1>';
 
+
+
+//$strings[] = "\u{1F30F}" . ' time ' . "\u{23F3}" . ' is up! Jasså?';
+
+/*
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+$clean_html = $purifier->purify($dirty_html);
+*/
 
 echo '<table>
 <tbody>';
