@@ -4,13 +4,14 @@ Helper class for working with and manipulating strings.
 
 ## VERSION
 
-v0.0.0 - Released 27 may 2020
+v0.5.0 - Updated, 31 may 2020
 
 ## USAGE
 
 Example of usage, with basic features out of the box:
 
-    $sql = new strbuddy;  
+    $str = new strbuddy;  
+    echo $str->filename($string); // Valid filename
 
 Outputs:  
 
