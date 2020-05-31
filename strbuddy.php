@@ -79,7 +79,7 @@ class strbuddy {
             'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
             'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
             'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
-            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', '-'=>'',
+            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r',
         ];
         $string = trim($string);
         $string = strtr($string, $table);
@@ -92,7 +92,7 @@ class strbuddy {
         );
         $string = preg_replace(array_keys($utf8), array_values($utf8), $string);
         //$string = str_replace(['"',"'"], [' ',' '], $string);
-        $string = trim(preg_replace("/[\s-]+/", " ", $string));
+        $string = trim(preg_replace("/[\s]+/", " ", $string));
 
         if( $space !== ' ')
             $string = str_replace(' ', $space, $string);
@@ -118,6 +118,8 @@ class strbuddy {
         $filename = preg_replace($this->filesystem_stripper, '_', $filename);
         $filename = $this->aschii_only($filename, $delim);
         $filename = trim($filename, $delim . " \t\n\r\0\x0B");
+        if( $delim != '-' )
+            $filename = trim($filename, '-');
 
         if( $ext === null )
             return $filename;

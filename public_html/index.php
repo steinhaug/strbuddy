@@ -28,6 +28,7 @@ $strings = [
     'Git-2.26.1-64-bit (1).exe',
     'wkhtmltox-0.12.5-1.msvc2015-win64.exe',
     'blåbær.null',
+    utf8_encode('æøåÆØÅ') . utf8_encode(utf8_encode('blåbær.null')),
     ' Bl-<å[b]æ>r".🍁🍃🍂🌰🍁🌿🌾🌼🌻.?nUll_* '
 ];
 
