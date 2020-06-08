@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="Steinhaug Standard Ruleset">
+    <description>Steinhaug Standard Ruleset</description>
+    <rule ref="Generic">
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+
+        <exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition" />
+
+        <exclude name="Generic.Commenting.DocComment.SpacingAfter" />
+
+        <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine" />
+
+        <exclude name="Generic.Files.LineLength.TooLong" />
+        <exclude name="Generic.Files.LineLength.MaxExceeded" />
+        <exclude name="Generic.Files.EndFileNoNewline.Found" />
+        <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
+
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine" />
+
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
+
+        <exclude name="Generic.NamingConventions.CamelCapsFunctionName.ScopeNotCamelCaps" />
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase" />
+
+
+        <exclude name="Generic.PHP.UpperCaseConstant.Found" />
+        <exclude name="Generic.PHP.ClosingPHPTag.NotFound" />
+        <exclude name="Generic.PHP.RequireStrictTypes.MissingDeclaration" />
+    </rule>
+
+    <!-- allowing whitespace indentation from left -->
+    <rule ref="Generic">
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+    </rule>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="4"/>
+            <property name="tabIndent" value="false"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+
+</ruleset>
