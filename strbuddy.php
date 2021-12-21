@@ -20,7 +20,7 @@
  */
 class strbuddy
 {
-    const version = '0.6.0';
+    public const version = '0.7.0';
 
     public static $filesystem_stripper = '/([^\x20-~]+)|([\\/:?"<>|\*]+)/';
 
@@ -70,24 +70,24 @@ class strbuddy
      *
      * @return A string where known illegal characters are converted into ASCHII, lesser complexity.
      */
-    public static function aschiify($string, $space=' ')
+    public static function aschiify($string, $space = ' ')
     {
         $table = [
-            'Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z',
-            'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c',
-            'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
-            'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
-            'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
-            'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
-            'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
-            'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
-            'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
-            'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
-            'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
-            'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
-            'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
-            'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
-            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r',
+            'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z',
+            'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
+            'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A',
+            'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+            'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I',
+            'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O',
+            'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U',
+            'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss',
+            'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a',
+            'å' => 'a', 'æ' => 'a', 'ç' => 'c', 'è' => 'e', 'é' => 'e',
+            'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i',
+            'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o',
+            'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o', 'ù' => 'u',
+            'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ý' => 'y', 'þ' => 'b',
+            'ÿ' => 'y', 'Ŕ' => 'R', 'ŕ' => 'r',
         ];
         $string = trim($string);
         $string = strtr($string, $table);
@@ -147,7 +147,7 @@ class strbuddy
     /**
      * Remove any none-ASCHII character
      */
-    public static function aschii_only($string, $space=' ')
+    public static function aschii_only($string, $space = ' ')
     {
         $string = trim(preg_replace('/[[:^print:]]/', '', $string));
 
@@ -161,7 +161,7 @@ class strbuddy
     /**
      * Remove any multibyte character
      */
-    public static function remove_4byte($string, $space=' ')
+    public static function remove_4byte($string, $space = ' ')
     {
         $string = preg_replace('%(?:
           \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
@@ -197,26 +197,26 @@ class strbuddy
     public static function is_utf82($str)
     {
         $strlen = strlen($str);
-        for ($i=0; $i<$strlen; $i++) {
+        for ($i = 0; $i < $strlen; $i++) {
             $ord = ord($str[$i]);
             if ($ord < 0x80) {
                 continue;
             } // 0bbbbbbb
-            elseif (($ord&0xE0)===0xC0 && $ord>0xC1) {
+            elseif (($ord & 0xE0) === 0xC0 && $ord > 0xC1) {
                 $n = 1;
             } // 110bbbbb (exkl C0-C1)
-            elseif (($ord&0xF0)===0xE0) {
+            elseif (($ord & 0xF0) === 0xE0) {
                 $n = 2;
             } // 1110bbbb
-            elseif (($ord&0xF8)===0xF0 && $ord<0xF5) {
+            elseif (($ord & 0xF8) === 0xF0 && $ord < 0xF5) {
                 $n = 3;
             } // 11110bbb (exkl F5-FF)
             else {
                 return false;
             } // ungültiges UTF-8-Zeichen
 
-            for ($c=0; $c<$n; $c++) { // $n Folgebytes? // 10bbbbbb
-                if (++$i===$strlen || (ord($str[$i])&0xC0)!==0x80) {
+            for ($c = 0; $c < $n; $c++) { // $n Folgebytes? // 10bbbbbb
+                if (++$i === $strlen || (ord($str[$i]) & 0xC0) !== 0x80) {
                     return false;
                 }
             } // ungültiges UTF-8-Zeichen
@@ -231,7 +231,7 @@ class strbuddy
     {
         $newData = '';
         $len = strlen($data);
-        for ($x=0;$x<$len;$x++) {
+        for ($x = 0;$x < $len;$x++) {
             $newData .= str_pad(dechex(ord($data[$x])), 2, '0', STR_PAD_LEFT);
         }
         return $newData;
@@ -247,8 +247,8 @@ class strbuddy
             return '';
         }
         $len = strlen($data);
-        for ($x=0;$x<$len;$x+=2) {
-            $newData .= chr(hexdec($data[$x].$data[$x+1]));
+        for ($x = 0;$x < $len;$x += 2) {
+            $newData .= chr(hexdec($data[$x] . $data[$x + 1]));
         }
         return $newData;
     }

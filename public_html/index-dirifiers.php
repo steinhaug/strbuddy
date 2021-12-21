@@ -1,6 +1,6 @@
 <?php
 
-define('BR','<br>');
+define('BR', '<br>');
 require '../vendor/autoload.php';
 
 require 'func.dirifiers.php';
@@ -53,7 +53,7 @@ echo '<!DOCTYPE html>
     <body>
 ';
 
-$dirifiers = ['dirify2','cleanString','dirify','convert_high_ascii','filter_1','filter_2','filter_3','cleanString_rewh','cleanString_frte','clean_edfu'];
+$dirifiers = ['dirify2', 'cleanString', 'dirify', 'convert_high_ascii', 'filter_1', 'filter_2', 'filter_3', 'cleanString_rewh', 'cleanString_frte', 'clean_edfu'];
 
 $strings = [
     'æ/Æ ø/Ø å/Å ä/Ä ö/Ö blåbær frøya ØLBÅTSØK',
@@ -72,11 +72,9 @@ echo '<h1>strbuddy test suit v0.0.0</h1>';
 echo '<table>
 <tbody>';
 
-foreach($strings AS $str){
-
+foreach ($strings as $str) {
     $new_string = true;
-    foreach($dirifiers AS $func){
-
+    foreach ($dirifiers as $func) {
         $result = $func($str);
 
         $line = [];
@@ -90,7 +88,7 @@ foreach($strings AS $str){
         $line[] = soundex($result);
         $line[] = metaphone($result, 100);
 
-        if($new_string){
+        if ($new_string) {
             $new_string = false;
 
             echo '<tr class="new_string">';
@@ -103,10 +101,7 @@ foreach($strings AS $str){
             echo '<td class="td' . str_pad($i, 2, '0', STR_PAD_LEFT) . '">' . htmlentities($line[$i], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '</td>';
         }
         echo '</tr>';
-
     }
-
-
 }
 echo '</tbody>
 </table>';

@@ -1,6 +1,6 @@
 <?php
 
-define('BR','<br>');
+define('BR', '<br>');
 require '../vendor/autoload.php';
 
 require 'php.libs/emoji-php-static/Emoji.class.php';
@@ -24,7 +24,7 @@ echo '<!DOCTYPE html>
 $funcs = ['dirify'];
 
 $strings = [
-    'jv15320' . "\u{1F30F}"  . '-org-01.jv15320 org',
+    'jv15320' . "\u{1F30F}" . '-org-01.jv15320 org',
     'Git-2.26.1-64-bit (1).exe',
     'wkhtmltox-0.12.5-1.msvc2015-win64.exe',
     'blåbær.null',
@@ -34,7 +34,7 @@ $strings = [
 
 
 
-$strbuddy = new strbuddy;
+$strbuddy = new strbuddy();
 echo '<h1>strbuddy test suit ' . $strbuddy::version . '</h1>';
 
 
@@ -50,11 +50,9 @@ $clean_html = $purifier->purify($dirty_html);
 echo '<table>
 <tbody>';
 
-foreach($strings AS $str){
-
+foreach ($strings as $str) {
     $new_string = true;
-    foreach($funcs AS $func){
-
+    foreach ($funcs as $func) {
         $result = $strbuddy->{$func}($str);
 
         $line = [];
@@ -68,7 +66,7 @@ foreach($strings AS $str){
         $line[] = soundex($result);
         $line[] = metaphone($result, 100);
 
-        if($new_string){
+        if ($new_string) {
             $new_string = false;
 
             echo '<tr class="new_string">';
@@ -81,10 +79,7 @@ foreach($strings AS $str){
             echo '<td class="td' . str_pad($i, 2, '0', STR_PAD_LEFT) . '">' . htmlentities($line[$i], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '</td>';
         }
         echo '</tr>';
-
     }
-
-
 }
 echo '</tbody>
 </table>';

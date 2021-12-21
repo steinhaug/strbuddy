@@ -1,4 +1,5 @@
 <?php
+
 class teststrbuddy extends strbuddy
 {
     public function getversion()
