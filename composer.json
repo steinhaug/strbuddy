@@ -12,6 +12,8 @@
             "homepage": "http://kim.steinhaug.com"
         }
     ],
+    "prefer-stable" : true,
+
     "require": {
         "php": ">=8.0.0",
         "ext-mbstring": "*"
