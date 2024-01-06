@@ -4,6 +4,9 @@ Helper class for working with and manipulating strings.
 
 ## VERSION
 
+v0.7.0 - Updated, 17 des 2021
+\+ Upgraded source to PHP 8.0
+
 v0.5.0 - Updated, 31 may 2020
 
 ## USAGE
